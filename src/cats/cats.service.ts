@@ -12,30 +12,31 @@ export class CatsService {
 
   async findAll(): Promise<any> {
     const dummyRecords: any[] = [];
+    const fileExtensions = [
+      'pdf',
+      'doc',
+      'docx',
+      'xls',
+      'xlsx',
+      'ppt',
+      'pptx',
+      'txt',
+      'jpg',
+      'png',
+      'gif',
+      'mp4',
+    ];
+    for (let i = 0; i < 10; i++) {
 
-    for (let i = 0; i < 20; i++) {
-      const fileExtensions = [
-        'pdf',
-        'doc',
-        'docx',
-        'xls',
-        'xlsx',
-        'ppt',
-        'pptx',
-        'txt',
-        'jpg',
-        'png',
-        'gif',
-        'mp4',
-      ];
       const extension =
         fileExtensions[this.getRandomInt(0, fileExtensions.length - 1)];
+        const  fileType=Math.random() > 0.5 ? FileType.FILE : FileType.FOLDER;
       const record: any = {
         documentId:i,
-        name: `File ${i}.${extension}`,
+        name: fileType===FileType.FOLDER?`Folder ${this.getRandomInt(0,1000000)}`: `File ${this.getRandomInt(0,1000000)}.${extension}`,
         extension,
         size: 1000,
-        type: Math.random() > 0.5 ? FileType.FILE : FileType.FOLDER,
+        type: fileType,
         documentType: DocumentType.ALL,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -48,7 +49,6 @@ export class CatsService {
       dummyRecords.push(record);
     }
     const response = { files: dummyRecords };
-    await this.wait(5000);
     return response;
   }
 
