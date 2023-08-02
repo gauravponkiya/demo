@@ -4,7 +4,7 @@ import { SwaggerModule,DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({origin:'*'});
   const config=new DocumentBuilder().setTitle('NestJs').setDescription('The NestJs API description').setVersion('1.0').addTag('NestJs').build();
   const document=SwaggerModule.createDocument(app,config);
   SwaggerModule.setup('api',app,document);
