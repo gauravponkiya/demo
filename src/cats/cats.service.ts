@@ -44,7 +44,7 @@ export class CatsService {
         fileExtensions[this.getRandomInt(0, fileExtensions.length - 1)];
         const  fileType=Math.random() > 0.5 ? FileType.FILE : FileType.FOLDER;
       const record: any = {
-        documentId:i,
+        documentId:i.toString(),
         name: fileType===FileType.FOLDER?`Folder ${this.getRandomInt(0,1000000)}`: `File ${this.getRandomInt(0,1000000)}.${extension}`,
         extension,
         size: 1000,
