@@ -1,4 +1,4 @@
-import { Body, Controller, Get,Headers, Post } from "@nestjs/common";
+import { Body, Controller, Get,Headers, Param, Post } from "@nestjs/common";
 import { Cat } from "./cats.dto";
 import { CatsService } from "./cats.service";
 import { ApiTags } from "@nestjs/swagger";
@@ -15,8 +15,12 @@ export class CatsController {
     return this.catsService.findAll();
   }
 
-  @Post()
-  async addCat(@Body(new ValidationPipe()) cat: Cat) {
-    this.catsService.create(cat);
+  @Post(':id/copy')
+  async copy(@Body() body: any,@Param('id') id:string) {
+   return this.catsService.copyAndMove(body);
+  }
+  @Post(':id/move')
+  async move(@Body() body: any ,@Param('id') id:string) {
+   return  this.catsService.copyAndMove(body);
   }
 }

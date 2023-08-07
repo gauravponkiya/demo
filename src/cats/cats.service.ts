@@ -11,6 +11,18 @@ export class CatsService {
   }
 
   async findAll(): Promise<any> {
+   
+    const response = { files: this.getDummyDocumentsRecord(10) };
+    return response;
+  }
+  async copyAndMove(body){
+    const dummyRecord=this.getDummyDocumentsRecord(1)
+
+    return {
+      ...dummyRecord[0],
+    }
+  }
+  getDummyDocumentsRecord(n:number){
     const dummyRecords: any[] = [];
     const fileExtensions = [
       'pdf',
@@ -48,8 +60,7 @@ export class CatsService {
 
       dummyRecords.push(record);
     }
-    const response = { files: dummyRecords };
-    return response;
+    return dummyRecords
   }
 
   getRandomInt(min, max) {
